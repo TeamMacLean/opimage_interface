@@ -13,7 +13,7 @@ def check_pid(pid):
     else:
         return True
 
-jobs = utils.load_from_json('jobs_list.json')
+jobs = utils.load_from_json('job_list.json')
 
 updated_job_status = []
 
@@ -24,4 +24,4 @@ for j in jobs:
         j['status'] = 'dead'
     updated_job_status.append(j)
 
-utils.write_to_json(updated_job_status, 'jobs_list.json')
+utils.write_to_json(updated_job_status, 'job_list.json')

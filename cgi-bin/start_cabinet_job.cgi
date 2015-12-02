@@ -47,7 +47,7 @@ print "Content-Type: text/html"
 print
 print "<html>"
 print "<head>"
-print   '<meta http-equiv="refresh" content="0;url=http://localhost:8000/index.html" />'
+print   '<meta http-equiv="refresh" content="0;url=../index.html" />'
 print    '<title>You are going to be redirected</title>'
 print  '</head>'
 print '<body> '

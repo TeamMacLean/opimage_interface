@@ -7,12 +7,12 @@ import subprocess
 import datetime
 
 
-def start_orphan_process():
+def start_orphan_process(work_folder, interval):
     '''starts job.cgi
 
     returns integer: pid of job.cgi'''
 
-    process = subprocess.Popen('cgi-bin/job.cgi', shell=False)
+    process = subprocess.Popen(['cgi-bin/picture_job.cgi', work_folder, str(interval)],  shell=False)
     return process.pid
 
 def add_pid_to_joblist(pid, short_name, work_folder):
@@ -37,14 +37,14 @@ form = cgi.FieldStorage()
 interval = int(form.getvalue("interval"))
 short_name = form.getvalue("short_name").replace(" ", "_")
 work_folder = make_work_folder(short_name)
-pid = start_orphan_process()
+pid = start_orphan_process(work_folder, interval)
 add_pid_to_joblist(pid, short_name, work_folder)
 
 print "Content-Type: text/html"
 print
 print "<html>"
 print "<head>"
-print   '<meta http-equiv="refresh" content="0;url=http://localhost:8000/index.html" />'
+print   '<meta http-equiv="refresh" content="0;url=../index.html" />'
 print    '<title>You are going to be redirected</title>'
 print  '</head>'
 print '<body> '

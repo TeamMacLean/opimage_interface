@@ -36,12 +36,16 @@ function add_existing_image_folder_list(url, element){
       console.log(i);
       console.log(image_folder);
       image_folder_list.push("<tr><td>" + image_folder['short_name'] + '</td><td>' +
-
+      "<a href='/" +
+      image_folder['path'] + "'>" + image_folder['path'] + "</a>" + '</td><td>' +
+      image_folder['status'] + '</td><td>' +
+      String(new Date(image_folder['collection_datetime'])) + '</td><td>' +
+      '</tr>'
       );
     });
     if (image_folder_list.length > 0){
       console.log(image_folder_list.length)
-      $(element).replaceWith("<table class='table'><tr><th>Job Name</th><th>Image Folder</th><th>Folder Status</th><th>Collection Data Time</th><th></th><th></th><th></th></tr>" + image_folder_list.join("") + "</table>");
+      $(element).replaceWith("<table class='table'><tr><th>Job Name</th><th>Image Folder</th><th>Folder Status</th><th>Collection Date Time</th><th></th><th></th><th></th></tr>" + image_folder_list.join("") + "</table>");
     }
   });
 }

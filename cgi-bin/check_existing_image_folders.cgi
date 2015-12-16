@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-import os,sys
+import os
 from opimage import utils
 
 def check_folder(folder):

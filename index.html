@@ -25,58 +25,28 @@
     </div>
 
     <div class="jumbotron">
-      <h1>Webb Interface</h1>
-      <p class="lead">Set up the cabinet, start a new image collection task or check the status of existing jobs</p>
+      <h1>Field Image Analysis Interface</h1>
+      <p class="lead">Start a new image collection task or analyse existing runs</p>
       <p>
-        <a class="btn btn-lg btn-success" href="#" role="button" id="new_cabinet_task_button">New cabinet task</a>
-        <a class="btn btn-lg btn-success" href="#" role="button" id="new_image_task_button">New image collection task</a>
+        <a class="btn btn-lg btn-success" href="#" role="button" id="new_image_collection_task_button">New image collection task</a>
       </p>
     </div>
 
-    <div id="new_image_task_form">
+    <div id="new_image_collection_task_form">
       <h3>New Image Collection Task</h3>
       <form role="form" action="cgi-bin/start_image_job.cgi" method="post">
-        <div class="row">
-        <div class="form-group col-xs-4">
-          <label for="short_name">Short name for the task:</label>
-          <input type="text" class="form-control" id="short_name" name="short_name" value="my great task">
-        </div>
-        <div class="form-group col-xs-3">
-          <label for="pwd">Minutes between images:</label>
-          <input type="text" class="form-control" id="interval" name="interval" value="20">
-        </div>
-      </div>
-        <p><button class="btn btn-sm btn-warning" href="#" type="submit" id="submit_new_image_job">Start Image Collection</button></p>
+        <!-- Doesn't do anything yet - add field code here... -->
+        <p><button class="btn btn-sm btn-warning" href="#" type="submit" id="submit_new_image_collection_job">Start Image Collection</button></p>
       </form>
     </div>
 
-    <div id="new_cabinet_task_form">
-      <h3>New Cabinet Task</h3>
-      <form role="form" action="cgi-bin/start_cabinet_job.cgi" method="post">
-        <div class="row">
-          <div class="form-group col-xs-4">
-            <label for="short_name">Short name for the task:</label>
-            <input type="text" class="form-control" id="short_name" name="short_name" value="my great task">
-          </div>
-          <div class="form-group col-xs-2">
-            <label for="pwd">Dark Interval (hh):</label>
-            <input type="text" class="form-control" id="dark_interval_hours" name="dark_interval_hours" value="16">
-          </div>
-          <div class="form-group col-xs-2">
-            <label for="pwd">Dark Interval (mm):</label>
-            <input type="text" class="form-control" id="dark_interval_minutes" name="dark_interval_minutes" value="00">
-          </div>
-          <div class="form-group col-xs-2">
-            <label for="pwd">Light Interval (hh):</label>
-            <input type="text" class="form-control" id="light_interval_hours" name="light_interval_hours" value="8">
-          </div>
-          <div class="form-group col-xs-2">
-            <label for="pwd">Light Interval (mm):</label>
-            <input type="text" class="form-control" id="light_interval_minutes" name="light_interval_minutes" value="00">
-          </div>
+    <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>Existing Image Collections</h4>
+          <ul id="image_folder_list">
+            <li>No Existing Images Found</li>
+          </ul>
         </div>
-        <p><button class="btn btn-sm btn-warning" href="#" type="submit" id="submit_new_cabinet_job">Start Cabinet</button></p>
-      </form>
     </div>
 
     <div class="row marketing">
@@ -90,7 +60,7 @@
     </div>
 
     <footer class="footer">
-      <p>Built with carefree abandon to a soundtrack of insouciant joy by Team MacLean.</p>
+      <p>Built with a sense of dread and foreboding by Team MacLean.</p>
     </footer>
 
   </div> <!-- /container -->
@@ -103,18 +73,15 @@
 
   <script>
   $(document).ready(function(){
-    $('#new_image_task_form').hide();
-    $("#new_image_task_button").click(function(){
-      $("#new_image_task_form").toggle();
+    $('#new_image_collection_task_form').hide();
+    $("#new_image_collection_task_button").click(function(){
+      $("#new_image_collection_task_form").toggle();
     });
   });
-
-  $(document).ready(function(){
-    $('#new_cabinet_task_form').hide();
-    $("#new_cabinet_task_button").click(function(){
-      $("#new_cabinet_task_form").toggle();
-    });
-  });
+  </script>
+  <script>
+  $.get('cgi-bin/check_existing_image_folders.cgi');
+  add_existing_image_folder_list('cgi-bin/get_image_folders.cgi','#image_folder_list');
   </script>
 
   <script>

@@ -26,3 +26,22 @@ function remove_job_from_list(pid){
   var url = 'cgi-bin/remove_job_from_list.cgi?pid=' + pid;
   window.location.replace(url);
 }
+
+function add_existing_image_folder_list(url, element){
+  console.log(url);
+  $.getJSON(url, function( data ){
+    console.log(data);
+    var image_folder_list = [];
+    $.each(data, function(i, image_folder){
+      console.log(i);
+      console.log(image_folder);
+      image_folder_list.push("<tr><td>" + image_folder['short_name'] + '</td><td>' +
+
+      );
+    });
+    if (image_folder_list.length > 0){
+      console.log(image_folder_list.length)
+      $(element).replaceWith("<table class='table'><tr><th>Job Name</th><th>Image Folder</th><th>Folder Status</th><th>Collection Data Time</th><th></th><th></th><th></th></tr>" + image_folder_list.join("") + "</table>");
+    }
+  });
+}

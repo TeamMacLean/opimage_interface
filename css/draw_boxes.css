@@ -1,0 +1,43 @@
+.image {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+}
+.selection-box {
+  position:    absolute;
+  background: transparent;
+  border:     3px dotted #ff0;
+  z-index: 3;
+}
+.final {
+  position: absolute;
+  background: rgba(255,255,0,0.3);
+  border: 1px solid rgba(0,0,0,0.6);
+  z-index: 2;
+
+-moz-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+-webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+
+}
+
+.final h2{
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100%;  
+}
+
+#preview_pane {
+  position: relative;
+  width:  400px;
+  height: 300px;
+  background:  #ddd;
+  line-height: 300px;
+  color:  #666;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  z-index: 1;
+}

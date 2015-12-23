@@ -28,24 +28,33 @@ function remove_job_from_list(pid){
 }
 
 function add_existing_image_folder_list(url, element){
-  console.log(url);
   $.getJSON(url, function( data ){
     console.log(data);
     var image_folder_list = [];
     $.each(data, function(i, image_folder){
-      console.log(i);
-      console.log(image_folder);
-      image_folder_list.push("<tr><td>" + image_folder['short_name'] + '</td><td>' +
+      var analysis_exists = 'No';
+      var analysis_button = '';
+      if (image_folder['analysis_exists']){
+        analysis_exists = 'Yes';
+      }
+      else{
+        analysis_button = "</td><td><div class='dropdown'>  <button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Select Analysis Method <span class='caret'></span> </button><ul class='dropdown-menu'> <li><a href='select_regions.html?path=" +
+        image_folder['path'] +
+         "'>NDVI</a></li> <li><a href='#'>Method 2</a></li><li><a href='#'>Method 3</a></li></ul></div></td><td>";
+      }
+      image_folder_list.push("<tr><td>" + image_folder['short_name'] + "</td><td>" +
       "<a href='/" +
       image_folder['path'] + "'>" + image_folder['path'] + "</a>" + '</td><td>' +
       image_folder['status'] + '</td><td>' +
       String(new Date(image_folder['collection_datetime'])) + '</td><td>' +
+      analysis_exists + '</td><td>' +
+      analysis_button + '</td><td>' +
       '</tr>'
       );
     });
     if (image_folder_list.length > 0){
       console.log(image_folder_list.length)
-      $(element).replaceWith("<table class='table'><tr><th>Job Name</th><th>Image Folder</th><th>Folder Status</th><th>Collection Date Time</th><th></th><th></th><th></th></tr>" + image_folder_list.join("") + "</table>");
+      $(element).replaceWith("<table class='table'><tr><th>Job Name</th><th>Image Folder</th><th>Folder Status</th><th>Collection Date Time</th><th>Existing Analysis</th><th></th><th></th></tr>" + image_folder_list.join("") + "</table>");
     }
   });
 }

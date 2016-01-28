@@ -42,8 +42,8 @@
       </div>
     </div>
     <div id="post_buttons">
-      <button type="button" class="btn btn-primary" >Analyse now</button>
-      <button type="button" class="btn btn-secondary">Export Regions</button>
+      <button type="button" class="btn btn-primary" id="analyse">Analyse now</button>
+      <button type="button" class="btn btn-secondary" id="export_regions">Export Regions</button>
     </div>
     <h2>Areas Selected</h2>
     <div id="output">
@@ -55,15 +55,15 @@
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/select_boxes.js"></script>
   <script src="js/files.js"></script>
-
+  <script src="js/FileSaver.min.js"></script>
 
   <script>
   $.ajaxSetup({async: false});
   </script>
   <script>
   $(document).ready(function(){
-    var path = getParameterByName('path');
-    var image_list = get_image_list(path);
+    var path = fileUtils.getParameterByName('path');
+    var image_list = fileUtils.get_image_list(path);
     $("#set").on('click', function () {
       var i = image_list.shift();
       if (i != undefined){
@@ -80,6 +80,9 @@
       $("#post_buttons").hide();
       $("#set").trigger("click");
   });
+  </script>
+  <script>
+
   </script>
 </body>
 </html>

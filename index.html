@@ -81,12 +81,12 @@
   </script>
   <script>
   $.get('cgi-bin/check_existing_image_folders.cgi');
-  add_existing_image_folder_list('cgi-bin/get_image_folders.cgi','#image_folder_list');
+  jobUtils.add_existing_image_folder_list('cgi-bin/get_image_folders.cgi','#image_folder_list');
   </script>
 
   <script>
   $.get('cgi-bin/check_live_jobs.cgi');
-  add_job_list('cgi-bin/get_job_list.cgi','#job_list');
+  jobUtils.add_job_list('cgi-bin/get_job_list.cgi','#job_list');
   </script>
 
   <script>

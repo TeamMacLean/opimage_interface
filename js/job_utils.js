@@ -1,4 +1,5 @@
-function add_job_list(url,element) {
+var jobUtils = {};
+jobUtils.add_job_list = function(url,element) {
   $.getJSON(url, function( data ) {
     var job_list = [];
     $.each(data, function(i, job){
@@ -7,8 +8,8 @@ function add_job_list(url,element) {
       job['status'] + "</td><td>" +
       job['type'] + "</td><td>" +
       String(new Date(job['start_time'])) + "</td><td><a href='/" +
-      job['work_folder'] + "'>" + job['work_folder'] + "</a></td><td><button type='button' class='btn btn-danger' onclick='kill_job(" +
-      job['pid'] + ")'>Stop</button></td><td><button type='button' class='btn btn-danger' onclick='remove_job_from_list(" +
+      job['work_folder'] + "'>" + job['work_folder'] + "</a></td><td><button type='button' class='btn btn-danger' onclick='jobUtils.kill_job(" +
+      job['pid'] + ")'>Stop</button></td><td><button type='button' class='btn btn-danger' onclick='jobUtils.remove_job_from_list(" +
        job['pid'] + ")'>Remove</button></td></tr>");
     });
     if (job_list.length > 0){
@@ -17,17 +18,17 @@ function add_job_list(url,element) {
   });
 }
 
-function kill_job(pid){
+jobUtils.kill_job = function(pid){
   var url = 'cgi-bin/kill_job.cgi?pid=' + pid;
   window.location.replace(url);
 }
 
-function remove_job_from_list(pid){
+jobUtils.remove_job_from_list = function(pid){
   var url = 'cgi-bin/remove_job_from_list.cgi?pid=' + pid;
   window.location.replace(url);
 }
 
-function add_existing_image_folder_list(url, element){
+jobUtils.add_existing_image_folder_list = function(url, element){
   $.getJSON(url, function( data ){
     console.log(data);
     var image_folder_list = [];

@@ -62,6 +62,7 @@ $(function() {
       }
     });
 
+
   //$("#set").on('click', function () {
   //  var cache = new Image();
   //  cache.onload = function () {
@@ -75,6 +76,31 @@ $(function() {
  //
 //  });
 });
+
+$("#export_regions").on('click', function(){
+  var regions = list_to_json('#output')
+  fileUtils.send_download_json(regions, 'regions.json');
+
+} );
+
+function list_to_json(list_id ){
+  var result = {};
+  $(list_id).each( function( index ){
+    var entries = $(this).text().split(';');
+    for (i = 0; i< entries.length; i++){
+      var v = entries[i].replace(/\s+/,"").split(" ");
+      if (v.length == 4){
+        result[v[0]] = { "id" : v[0],
+                       "fname" : v[1],
+                       "box_name" : v[2],
+                       "coords" : v[3]
+                     };
+      }
+    }
+
+  });
+  return result;
+}
 
 function show_next_image(path, fname){
   var img_url = path + '/' + fname;
@@ -112,10 +138,8 @@ function update(){
   var fname = $("#image")[0].currentSrc.split("/").pop();
   var curr_id = fname.split('.')[0];
   var list = undefined;
-  console.log(curr_id);
   if ( $('#' + curr_id).length == 0){
     var new_list = "<ol id='" + curr_id + "'></ol>";
-    console.log(new_list);
     $("#output").append(new_list);
   }
   var result = "";
@@ -128,8 +152,9 @@ function update(){
            parseInt(($(el).position().left + $(el).width()),10) +
            "," +
            parseInt(($(el).position().top + $(el).height()),10);
-    result = result + "<li>" + fname + " " + $(el).attr("title") + " " + coords + "</li>";
-    console.log(result);
+           var box_name = $(el).attr("title").replace(/\s/g,"_").toLowerCase();
+
+    result = result + "<li>" + curr_id + " " + fname + " " + box_name + " " + coords + ";</li>";
   });
   $('#' + curr_id).empty().append(result);
 }

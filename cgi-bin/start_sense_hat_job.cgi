@@ -12,7 +12,7 @@ def start_orphan_process(work_folder, interval):
 
     returns integer: pid of job.cgi'''
 
-    process = subprocess.Popen(['cgi-bin/picture_job.cgi', work_folder, str(interval)],  shell=False)
+    process = subprocess.Popen(['cgi-bin/sense_hat_job.cgi', work_folder, str(interval)],  shell=False)
     return process.pid
 
 def add_pid_to_joblist(pid, short_name, work_folder):

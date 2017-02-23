@@ -25,11 +25,12 @@
     </div>
 
     <div class="jumbotron">
-      <h1>Webb Interface</h1>
-      <p class="lead">Start a new image collection task or check the status of existing jobs</p>
+      <h1>Task Manager</h1>
+      <p class="lead">Start new image and sensor collection tasks or check the status of existing jobs</p>
       <p>
   <!--      <a class="btn btn-lg btn-success" href="#" role="button" id="new_cabinet_task_button">New cabinet task</a>-->
         <a class="btn btn-lg btn-success" href="#" role="button" id="new_image_task_button">New image collection task</a>
+        <a class="btn btn-lg btn-success" href="#" role="button" id="new_sense_hat_task_button">New sensor collection task</a>
       </p>
     </div>
 
@@ -47,6 +48,23 @@
         </div>
       </div>
         <p><button class="btn btn-sm btn-warning" href="#" type="submit" id="submit_new_image_job">Start Image Collection</button></p>
+      </form>
+    </div>
+
+    <div id="new_sense_hat_task_form">
+      <h3>New SenseHat Collection Task</h3>
+      <form role="form" action="cgi-bin/start_sense_hat_job.cgi" method="post">
+        <div class="row">
+        <div class="form-group col-xs-4">
+          <label for="short_name">Short name for the task:</label>
+          <input type="text" class="form-control" id="short_name" name="short_name" value="my great task">
+        </div>
+        <div class="form-group col-xs-3">
+          <label for="pwd">Minutes between collections:</label>
+          <input type="text" class="form-control" id="interval" name="interval" value="20">
+        </div>
+      </div>
+        <p><button class="btn btn-sm btn-warning" href="#" type="submit" id="submit_new_sense_hat_job">Start SenseHat Collection</button></p>
       </form>
     </div>
 
@@ -90,7 +108,7 @@
     </div>
 
     <footer class="footer">
-      <p>Built with carefree abandon to a soundtrack of insouciant joy by Team MacLean.</p>
+      <p>Built by Team MacLean. </p>
     </footer>
 
   </div> <!-- /container -->
@@ -106,6 +124,13 @@
     $('#new_image_task_form').hide();
     $("#new_image_task_button").click(function(){
       $("#new_image_task_form").toggle();
+    });
+  });
+
+  $(document).ready(function(){
+    $('#new_sense_hat_task_form').hide();
+    $("#new_sense_hat_task_button").click(function(){
+      $("#new_sense_hat_task_form_task_form").toggle();
     });
   });
 

@@ -21,6 +21,7 @@ fname = os.path.join(work_folder, base + '_readings_.csv')
 f = open(fname, "w")
 heading = ",".join(["datetime", "humidity", "temp_h", "pressure", "temp_p" ])  + "\n"
 f.write(heading)
+f.close()
 
 
 def job(file = None):
@@ -28,10 +29,12 @@ def job(file = None):
     dt = datetime.datetime.now().isoformat()
     readings.insert(0,dt)
     result = ",".join(readings) + "\n"
+    file = open(file, "a")
     file.write(result)
+    file.close()
 
 
 
-schedule.every(interval).minutes.do( job, file=f )
+schedule.every(interval).minutes.do( job, file=fname )
 while True:
     schedule.run_pending()

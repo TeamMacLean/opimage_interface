@@ -23,15 +23,15 @@ heading = ",".join(["datetime", "humidity", "temp_h", "pressure", "temp_p" ])  +
 f.write(heading)
 
 
-def job(f):
+def job(file = None):
     readings = [str(r) for r in snshat.get_readings() ]
     dt = datetime.datetime.now().isoformat()
     readings.insert(0,dt)
     result = ",".join(readings) + "\n"
-    f.write(result)
+    file.write(result)
 
 
 
-schedule.every(interval).minutes.do( job(f) )
+schedule.every(interval).minutes.do( job, file=f )
 while True:
     schedule.run_pending()

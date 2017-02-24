@@ -24,7 +24,7 @@ f.write(heading)
 
 
 def job(f):
-    readings = snshat.get_readings()
+    readings = [str(r) for r in snshat.get_readings() ]
     dt = datetime.datetime.now().isoformat()
     readings.insert(0,dt)
     result = ",".join(readings) + "\n"
